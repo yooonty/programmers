@@ -4,30 +4,25 @@ import java.util.*;
 
 public class 제일작은수제거하기 {
 	public int[] solution(int[] arr) {
-		// sort를 이용해서 최솟값 가져오기    
-		int[] temp = arr.clone();
+		if (arr.length == 1) {
+			int[] answer = {-1};
+			return answer;
+		}
+
+		int min = 0;
+		int[] answer2 = new int[arr.length - 1];
+
+		// 가장 작은 수 구하기
+		int[] temp = Arrays.copyOf(arr, arr.length);
 		Arrays.sort(temp);
-		int min = temp[0];
-		//ArrayList를 이용하여 최솟값과 같지 않은 수만 추가
-		ArrayList<Integer> list = new ArrayList<Integer>();
+		min = temp[0];
+
+		// 가장 작은 수를 제거한 배열
+		int index = 0;
 		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] != min) {
-				list.add(arr[i]);
-			}
+			if (arr[i] != min)
+				answer2[index++] = arr[i];
 		}
-		
-		int[] answer;
-		// 경우를 나눠서 배열에 값을 저장하기		
-		if(list.size() == 0) {
-			answer = new int[1];
-			answer[0] = -1;
-		} else {
-			answer = new int[list.size()];
-			for (int i = 0; i < list.size(); i++) {
-				answer[i] = list.get(i);
-			}
-		}
-		
-        return answer;        
-    }
+		return answer2;
+	}
 }
